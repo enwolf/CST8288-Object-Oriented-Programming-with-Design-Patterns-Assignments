@@ -2,8 +2,8 @@
 	Author: Robin Phillis
 	Course: CST8288 Object Oriented Programming with Design Patterns
 	Assignment 1: Object Oriented Programming in Java
-	Date: 2022-05-26	
-
+	Date: 2022-05-25	
+	Objective: To demonstrate principles of OOP with java specifically: Inheritance, Polymorphism, Abstraction, Encapsulation and Composition
 */
 
 public class PhotoFile extends File{
@@ -17,6 +17,9 @@ public class PhotoFile extends File{
 	
 	public PhotoFile(String fileName){
 		super(fileName);
+	}	
+	public PhotoFile(String fileName, int fileSize){
+		super(fileName, fileSize);
 	}
 	
 	public PhotoFile(String fileName, String fileType){

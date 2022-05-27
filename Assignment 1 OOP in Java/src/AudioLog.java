@@ -2,8 +2,8 @@
 	Author: Robin Phillis
 	Course: CST8288 Object Oriented Programming with Design Patterns
 	Assignment 1: Object Oriented Programming in Java
-	Date: 2022-05-26	
-
+	Date: 2022-05-25	
+	Objective: To demonstrate principles of OOP with java specifically: Inheritance, Polymorphism, Abstraction, Encapsulation and Composition
 */
 
 import java.sql.Timestamp;
@@ -18,7 +18,10 @@ public class AudioLog extends Log{
 	//CONSTRUCTOR START
 	public AudioLog() {		
 		
-	}
+	}	
+	public AudioLog(int ID){
+		super(ID);	
+	}	
 	
 	public AudioLog(int ID, String uniqueShortCode ){
 		super(ID, uniqueShortCode);	
@@ -54,7 +57,7 @@ public class AudioLog extends Log{
 		System.out.print("Compleated generation of closed captions for Audio Log " + this.getName() );
 	}
 	
-	public void transcodeAudio(File fileName){
+	public void transcodeAudioFile(File fileName){
 		System.out.print("Compleated transcoding of closed captions for Audio Log " + this.getName() );
 	}
 

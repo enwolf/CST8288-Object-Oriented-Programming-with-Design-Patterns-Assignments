@@ -2,8 +2,8 @@
 	Author: Robin Phillis
 	Course: CST8288 Object Oriented Programming with Design Patterns
 	Assignment 1: Object Oriented Programming in Java
-	Date: 2022-05-26	
-
+	Date: 2022-05-25	
+	Objective: To demonstrate principles of OOP with java specifically: Inheritance, Polymorphism, Abstraction, Encapsulation and Composition
 */
 	
 import java.sql.Timestamp;
@@ -17,6 +17,10 @@ public class VideoLog extends Log{
 	
 	//CONSTRUCTOR START	
 	public VideoLog() {	}
+	
+	public VideoLog(int ID){
+		super(ID);	
+	}
 	
 	public VideoLog(int ID, String uniqueShortCode ){
 		super(ID, uniqueShortCode);	
@@ -50,11 +54,11 @@ public class VideoLog extends Log{
 		
 	public void generateClosedCaption(File fileName){
 		
-		System.out.print("Compleated generation of closed captions for Video Log " + this.getName() );
+		System.out.print("Compleated generation of closed captions for Video Log " + this.getName() + "\n" );
 	}
 	
 	public void transcodeVideoFile(File fileName){
-		System.out.print("Compleated transcoding of video file for Video Log " + this.getName() + "Video File: " + fileName.getFileName() );
+		System.out.print("Compleated transcoding of video file for Video Log " + this.getName() + "Video File: " + fileName.getFileName() + "\n" );
 	}	
 		
 	@Override
@@ -64,9 +68,9 @@ public class VideoLog extends Log{
 		for (int i = 0; i < VALID_FILE_TYPE.length; i++) {
 			
 			if ( VALID_FILE_TYPE[i].equals(fileName.getFileType()) ) {
-				System.out.println("Valid filetype for log type: " + this.getType() );
+				System.out.println("Valid filetype for log type: " + this.getType() + "\n" );
 			}else{
-				System.out.println("Invalid filetype for log type: " + this.getType() );
+				System.out.println("Invalid filetype for log type: " + this.getType() + "\n" );
 			}
 			
 		}
@@ -76,16 +80,16 @@ public class VideoLog extends Log{
 	public void validateFileSize(File fileName) {
 		
 		if (fileName.getFileSize() < MIN_FILE_SIZE) {
-			System.out.println("Video file is to small");
+			System.out.println("Video file is to small" + "\n");
 		}
 		
 		if (fileName.getFileSize() > MAX_FILE_SIZE) {
-			System.out.println("Video file is to large");
+			System.out.println("Video file is to large" + "\n");
 		}
 		
 		if (fileName.getFileSize() >= MIN_FILE_SIZE && fileName.getFileSize() <= MAX_FILE_SIZE) {
 			
-			System.out.println("Video file is valid to Attach.");	
+			System.out.println("Video file is valid to Attach. " + "\n");	
 		}		
 	}
 	

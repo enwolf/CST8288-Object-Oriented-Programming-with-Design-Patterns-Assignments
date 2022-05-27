@@ -3,7 +3,7 @@
 	Course: CST8288 Object Oriented Programming with Design Patterns
 	Assignment 1: Object Oriented Programming in Java
 	Date: 2022-05-25	
-
+	Objective: To demonstrate principles of OOP with java specifically: Inheritance, Polymorphism, Abstraction, Encapsulation and Composition
 */
 
 import java.sql.Timestamp;
@@ -24,12 +24,20 @@ public abstract class Log implements LogInterface{
 	
 	Log(){
 		
+		this.ID = 0;
+		this.uniqueShortCode = null;
+		this.name = null;
+		this.date = null;
+		this.description = null;
+		this.type = null;
+		this.attachFile = null;
 	}	
 	
-	public Log(int iD) {		
-		this.ID = iD;
+	public Log(int ID) {		
+		this.ID = ID;
 	}
 	
+
 	public Log(int iD, String uniqueShortCode) {		
 		this.ID = iD;
 		this.uniqueShortCode = uniqueShortCode;
@@ -89,45 +97,45 @@ public abstract class Log implements LogInterface{
 	
 	@Override
 	public void create() {
-		System.out.println( "Log ID: " + this.ID + "Log USC " + this.uniqueShortCode + " Log Name " + this.name + " has been created " );
+		System.out.println( "Created New Log \nLog ID: " + this.ID + "\nLog USC: " + this.uniqueShortCode + "\nLog Name: " + this.name + "\n" );
 		
 	}
 
 	@Override
 	public void read() {
-		System.out.println( "Reading Log info for: Log ID: " + this.ID + " UniqueShortCode: " + this.uniqueShortCode + " Log Name: " + this.name + " Creatd Date: " + this.date + 
-						    "Log Timestamp: " + this.timeStamp +  "Log description: " + this.description );	
+		System.out.println( "Reading Log info for\nLog ID: " + this.ID + "\nUniqueShortCode: " + this.uniqueShortCode + "\nLog Name: " + this.name + "\nCreatd Date: " + this.date + 
+						    "\nLog Timestamp: " + this.timeStamp +  "\nLog description: " + this.description + "\n" );	
 	}
 	
 	@Override
 	public void update() {
-		System.out.println( "Log ID: " + this.ID + " Log USC " + this.uniqueShortCode +  " Log Name " + name + " has been updated." );
+		System.out.println( "Log ID: " + this.ID + " Log USC " + this.uniqueShortCode +  " Log Name " + name + " has been updated.\n" );
 	}
 
 	@Override
 	public void delete() {
-		System.out.println( "Log ID: " + this.ID + " Log USC " + this.uniqueShortCode +  " Log Name " + name + " has been deleted." );
+		System.out.println( "Log ID: " + this.ID + " Log USC " + this.uniqueShortCode +  " Log Name " + name + " has been deleted.\n" );
 	}
 		
 	@Override
 	public void generateUSC() {
-		System.out.println( " Generating Unique Short Code in formate 'abc-abc-abc' " + " for " + this.name );		
+		System.out.println( "Generating Unique Short Code in formate 'abc-abc-abc' " + " for " + this.name + "\n" );		
 	}
 
 	@Override
 	public void generateLogID() {
-		System.out.println( " Generating ID value for Log: " + this.name);
+		System.out.println( "Generating ID value for Log: " + this.name  + "\n" );
 		
 	}
 	
 	@Override
 	public void generateTimeStamp() {		
 		Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
-		System.out.println( " Generating Timestamp: " + timeStamp + " attaching to Log Name: " + this.name + " Log ID: " + this.ID +  " Log USC: " + this.uniqueShortCode  );		
+		System.out.println( "Generating Timestamp: " + timeStamp + " attaching to Log Name: " + this.name + " Log ID: " + this.ID +  " Log USC: " + this.uniqueShortCode + "\n" );		
 	}	
 	
 	public void atttachFile(File fileName) {
-		System.out.println(" Attaching " + fileName + " to Log:" + this.name + " succesfully complated ");	
+		System.out.println("Attaching " + fileName + " to Log:" + this.name + " succesfully complated. \n");	
 	}
 
 	//ABSTRACT METHODS START	
