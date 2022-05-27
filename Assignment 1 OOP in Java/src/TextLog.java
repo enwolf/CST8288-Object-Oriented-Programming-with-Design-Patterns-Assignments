@@ -76,7 +76,7 @@ public class TextLog extends Log {
 			System.out.println("Error: incompatible text file detected. Please select a valid text File");
 		}		
 	}
-	
+	 
 	@Override
 	public void validateFileSize(File fileName) {
 		

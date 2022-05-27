@@ -89,7 +89,7 @@ public class PhotoLog extends Log {
 		}		
 		
 	}
-
+ 
 	public String getTYPE() {
 		return TYPE;
 	}

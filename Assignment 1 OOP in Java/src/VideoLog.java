@@ -74,7 +74,7 @@ public class VideoLog extends Log{
 			System.out.println("Error: incompatible video file detected. Please select a valid Video File.");
 		}		
 	}
-	
+	 
 	@Override
 	public void validateFileSize(File fileName) {
 		

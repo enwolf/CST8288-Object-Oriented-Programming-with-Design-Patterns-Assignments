@@ -138,8 +138,7 @@ public abstract class Log implements LogInterface{
 	public abstract void validateFileSize(File filename);
 
 	//ABSTRACT METHODS END	
-	
-	
+		
 	//SETTERS START
 	public void setID(int ID) {
 		this.ID = ID;

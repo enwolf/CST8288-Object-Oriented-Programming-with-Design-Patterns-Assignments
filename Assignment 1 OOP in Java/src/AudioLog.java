@@ -56,7 +56,7 @@ public class AudioLog extends Log{
 		
 		System.out.println("Compleated generation of closed captions for Audio Log " + this.getName() );
 	}
-	
+	 
 	public void transcodeAudioFile(File fileName){
 		System.out.println("Compleated transcoding of closed captions for Audio Log " + this.getName() );
 	}
