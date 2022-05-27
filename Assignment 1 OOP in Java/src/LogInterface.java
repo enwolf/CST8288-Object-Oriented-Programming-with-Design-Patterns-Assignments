@@ -17,5 +17,7 @@ public interface LogInterface {
 	public void generateUSC(); 	// USC = UniqueShortCode formated as "abc-abc-abc"
 	public void generateLogID();
 	public void generateTimeStamp();
+	public void validateFileType(File filename);
+	public void validateFileSize(File filename);
 	
 } //END OF CLASS

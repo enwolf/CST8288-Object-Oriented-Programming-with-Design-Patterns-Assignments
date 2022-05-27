@@ -122,6 +122,7 @@ public abstract class Log implements LogInterface{
 		System.out.println( "Generating Timestamp: " + timeStamp + " attaching to Log \nLog Name: " + this.name + "\nWith Log ID: " + this.ID +  "\nWith Log USC: " + this.uniqueShortCode + "\n" );		
 	}	
 	
+	@Override
 	public void atttachFile(File fileName) {
 		
 		//super dirty way to avoid having to handle a NullPointerException error.  
@@ -133,10 +134,12 @@ public abstract class Log implements LogInterface{
 		System.out.println("Attaching file:" + fileName.getFileName() + " to \nLog Name: " + this.name + " succesfully complated.");	
 	}
 
-	//ABSTRACT METHODS START	
+	//ABSTRACT METHODS START
+	@Override
 	public abstract void validateFileType(File filename);
+	
+	@Override
 	public abstract void validateFileSize(File filename);
-
 	//ABSTRACT METHODS END	
 		
 	//SETTERS START
