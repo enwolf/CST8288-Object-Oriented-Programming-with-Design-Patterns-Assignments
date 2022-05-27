@@ -11,25 +11,23 @@ import java.sql.Date;
 
 public abstract class Log implements LogInterface{
 
+	
 	private int ID;
 	private String uniqueShortCode;
 	private String name;
 	private Date date;
 	private Timestamp timeStamp;
 	private String description;
-	private String type;
 	private File attachFile;
-	
+
 	//CONSTRUCTOR START
 	
 	Log(){
-		
 		this.ID = 0;
 		this.uniqueShortCode = null;
 		this.name = null;
 		this.date = null;
 		this.description = null;
-		this.type = null;
 		this.attachFile = null;
 	}	
 	
@@ -38,34 +36,34 @@ public abstract class Log implements LogInterface{
 	}
 	
 
-	public Log(int iD, String uniqueShortCode) {		
-		this.ID = iD;
+	public Log(int ID, String uniqueShortCode) {		
+		this.ID = ID;
 		this.uniqueShortCode = uniqueShortCode;
 	}
 	
-	public Log(int iD, String uniqueShortCode, String name) {
-		this.ID = iD;
+	public Log(int ID, String uniqueShortCode, String name) {
+		this.ID = ID;
 		this.uniqueShortCode = uniqueShortCode;
 		this.name = name;
 	}
 	
-	public Log(int iD, String uniqueShortCode, String name, Date date) {		
-		this.ID = iD;
+	public Log(int ID, String uniqueShortCode, String name, Date date) {		
+		this.ID = ID;
 		this.uniqueShortCode = uniqueShortCode;
 		this.name = name;
 		this.date = date;
 	}	
 	
-	public Log(int iD, String uniqueShortCode, String name, Date date, Timestamp timeStamp) {		
-		this.ID = iD;
+	public Log(int ID, String uniqueShortCode, String name, Date date, Timestamp timeStamp) {		
+		this.ID = ID;
 		this.uniqueShortCode = uniqueShortCode;
 		this.name = name;
 		this.date = date;
 		this.timeStamp = timeStamp;
 	}
 
-	public Log(int iD, String uniqueShortCode, String name, Date date, Timestamp timeStamp, String description) {
-		this.ID = iD;
+	public Log(int ID, String uniqueShortCode, String name, Date date, Timestamp timeStamp, String description) {
+		this.ID = ID;
 		this.uniqueShortCode = uniqueShortCode;
 		this.name = name;
 		this.date = date;
@@ -73,23 +71,13 @@ public abstract class Log implements LogInterface{
 		this.description = description;
 	}
 
-	public Log(int iD, String uniqueShortCode, String name, Date date, Timestamp timeStamp, String description,	String type) {		
-		this.ID = iD;
-		this.uniqueShortCode = uniqueShortCode;
-		this.name = name;
-		this.date = date;
-		this.timeStamp = timeStamp;
-		this.description = description;
-		this.type = type;
-	}	
 
-	public Log(int iD, String uniqueShortCode, String name, Date date, Timestamp timeStamp, String description, String type, File attachFile) {		
-		this.ID = iD;
+	public Log(int ID, String uniqueShortCode, String name, Date date, Timestamp timeStamp, String description, File attachFile) {		
+		this.ID = ID;
 		this.uniqueShortCode = uniqueShortCode;
 		this.name = name;
 		this.date = date;
 		this.description = description;
-		this.type = type;
 		this.attachFile = attachFile;
 	}
 	
@@ -97,24 +85,24 @@ public abstract class Log implements LogInterface{
 	
 	@Override
 	public void create() {
-		System.out.println( "Created New Log \nLog ID: " + this.ID + "\nLog USC: " + this.uniqueShortCode + "\nLog Name: " + this.name + "\n" );
+		System.out.println( "Created New Log: \nLog ID: " + this.ID + "\nLog USC: " + this.uniqueShortCode + "\nLog Name: " + this.name + "\nCreate() Compleate.\n"  );
 		
 	}
 
 	@Override
 	public void read() {
-		System.out.println( "Reading Log info for\nLog ID: " + this.ID + "\nUniqueShortCode: " + this.uniqueShortCode + "\nLog Name: " + this.name + "\nCreatd Date: " + this.date + 
-						    "\nLog Timestamp: " + this.timeStamp +  "\nLog description: " + this.description + "\n" );	
+		System.out.println( "Reading Log: \nLog ID: " + this.ID + "\nUniqueShortCode: " + this.uniqueShortCode + "\nLog Name: " + this.name + "\nCreated: " + this.date + 
+						    "\nLog Timestamp: " + this.timeStamp +  "\nLog description: " + this.description + "\nRead() Compleate.\n"  );	
 	}
 	
 	@Override
 	public void update() {
-		System.out.println( "Log ID: " + this.ID + " Log USC " + this.uniqueShortCode +  " Log Name " + name + " has been updated.\n" );
+		System.out.println( "Updateing Log: \nLog ID: " + this.ID + "\nLog USC " + this.uniqueShortCode +  "\nLog Name: " + this.name + "\nUpdate() Compelate.\n" );
 	}
 
 	@Override
 	public void delete() {
-		System.out.println( "Log ID: " + this.ID + " Log USC " + this.uniqueShortCode +  " Log Name " + name + " has been deleted.\n" );
+		System.out.println( "Deleteing Log: \nLog ID: " + this.ID + "\nLog USC " + this.uniqueShortCode +  "\nLog Name: " + this.name + "\nDeleted() Compelate.\n" );
 	}
 		
 	@Override
@@ -131,11 +119,18 @@ public abstract class Log implements LogInterface{
 	@Override
 	public void generateTimeStamp() {		
 		Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
-		System.out.println( "Generating Timestamp: " + timeStamp + " attaching to Log Name: " + this.name + " Log ID: " + this.ID +  " Log USC: " + this.uniqueShortCode + "\n" );		
+		System.out.println( "Generating Timestamp: " + timeStamp + " attaching to Log \nLog Name: " + this.name + "\nWith Log ID: " + this.ID +  "\nWith Log USC: " + this.uniqueShortCode + "\n" );		
 	}	
 	
 	public void atttachFile(File fileName) {
-		System.out.println("Attaching " + fileName + " to Log:" + this.name + " succesfully complated. \n");	
+		
+		//super dirty way to avoid having to handle a NullPointerException error.  
+		if (fileName == null) {
+			System.out.println("Error Detected: Attempting to attach null file to log");
+			return;
+		}
+		
+		System.out.println("Attaching file:" + fileName.getFileName() + " to \nLog Name: " + this.name + " succesfully complated.");	
 	}
 
 	//ABSTRACT METHODS START	
@@ -146,8 +141,8 @@ public abstract class Log implements LogInterface{
 	
 	
 	//SETTERS START
-	public void setID(int iD) {
-		this.ID = iD;
+	public void setID(int ID) {
+		this.ID = ID;
 	}
 	
 	public void setUniqueShortCode(String uniqueShortCode) {
@@ -170,11 +165,7 @@ public abstract class Log implements LogInterface{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	public void setType(String type) {
-		this.type = type;
-	}
-	
+		
 	public void setAttachedFile(File attachFile) {
 		this.attachFile = attachFile;
 	}
@@ -210,10 +201,6 @@ public abstract class Log implements LogInterface{
 
 	public File getAttachedFile() {
 		return attachFile;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	//GETTERS END
