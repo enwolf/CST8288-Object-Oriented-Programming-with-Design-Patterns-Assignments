@@ -10,9 +10,10 @@ import java.sql.Timestamp;
 import java.sql.Date;
 
 public class PhotoLog extends Log {
-
+	
+	private final String TYPE = "PHOTO";
 	private final int MIN_FILE_SIZE = 10;
-	private final int MAX_FILE_SIZE = 50;
+	private final int MAX_FILE_SIZE = 80;
 	private final String VALID_FILE_TYPE[] = {".png" , ".jpg" , ".jpeg", ".gif" };
 	private String photoAnnotation;
 
@@ -43,35 +44,33 @@ public class PhotoLog extends Log {
 	
 	public PhotoLog(int ID, String uniqueShortCode, String name,  Date date, Timestamp timeStamp, String description ){
 		super(ID, uniqueShortCode, name, date, timeStamp, description);		
-	}	
-		
-	public PhotoLog(int ID, String uniqueShortCode, String name, Date date, Timestamp timeStamp, String description, String type) {
-		super(ID, uniqueShortCode, name, date, timeStamp, description, type);
-
 	}			
-	public PhotoLog(int ID, String uniqueShortCode, String name, Date date, Timestamp timeStamp, String description, String type, File attachFile){
-		super(ID, uniqueShortCode, name, date, timeStamp, description, type, attachFile);		
+		
+	public PhotoLog(int ID, String uniqueShortCode, String name, Date date, Timestamp timeStamp, String description, File attachFile){
+		super(ID, uniqueShortCode, name, date, timeStamp, description, attachFile);		
 	}
 	
-	//CONSTRUCTOR END
-	
+	//CONSTRUCTOR END	
 	
 	public void attachPhotoAnnotation(File fileName, String photoAnnotation) {
-		System.out.println("Atttaching text to image file:  " + fileName.getFileName() );
+		System.out.println("Atttaching text to image file: " + fileName.getFileName() );
 	}
 	
 	@Override
 	public void validateFileType(File fileName) {
-		
+
+		boolean match = false;
 
 		for (int i = 0; i < VALID_FILE_TYPE.length; i++) {
-			
-			if ( VALID_FILE_TYPE[i].equals(fileName.getFileType()) ) {
-				System.out.println("Valid filetype for log type: " + this.getType() );
-			}else{
-				System.out.println("Invalid filetype for log type: " + this.getType() );
+			if (VALID_FILE_TYPE[i].equals(fileName.getFileType())) {
+				System.out.println("Accepted: compatible photo file found, Uploading...");
+				match = true;
 			}			
-		}
+		}		
+
+		if (match != true) {
+			System.out.println("Error: incompatible photo file detected. Please select a valid photo File");
+		}		
 	}
 	
 	@Override
@@ -86,9 +85,13 @@ public class PhotoLog extends Log {
 		}
 		
 		if (fileName.getFileSize() >= MIN_FILE_SIZE && fileName.getFileSize() <= MAX_FILE_SIZE) {			
-			System.out.println("Photo file is valid to Attach.");	
+			System.out.println("Filesize correct: Attching Photo file. Uploading....");
 		}		
 		
+	}
+
+	public String getTYPE() {
+		return TYPE;
 	}
 	
 } //END OF CLASS

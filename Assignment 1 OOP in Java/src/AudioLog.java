@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 import java.sql.Date;
 
 public class AudioLog extends Log{
-
+	private final String TYPE = "AUDIO";
 	private final int MIN_FILE_SIZE = 50;
 	private final int MAX_FILE_SIZE = 200;
 	private final String VALID_FILE_TYPE[] = {".mp3" , ".ogg" ,".gp3" };
@@ -44,37 +44,39 @@ public class AudioLog extends Log{
 	}	
 		
 	public AudioLog(int ID, String uniqueShortCode, String name, Date date, Timestamp timeStamp, String description, String type) {
-		super(ID, uniqueShortCode, name, date, timeStamp, description, type);
+		super(ID, uniqueShortCode, name, date, timeStamp, description);
 
 	}			
 	public AudioLog(int ID, String uniqueShortCode, String name, Date date, Timestamp timeStamp, String description, String type, File attachFile){
-			super(ID, uniqueShortCode, name, date, timeStamp, description, type, attachFile);		
+			super(ID, uniqueShortCode, name, date, timeStamp, description, attachFile);		
 	}		
 	//CONSTRUCTOR END
 	
 	public void generateClosedCaption(File fileName){
 		
-		System.out.print("Compleated generation of closed captions for Audio Log " + this.getName() );
+		System.out.println("Compleated generation of closed captions for Audio Log " + this.getName() );
 	}
 	
 	public void transcodeAudioFile(File fileName){
-		System.out.print("Compleated transcoding of closed captions for Audio Log " + this.getName() );
+		System.out.println("Compleated transcoding of closed captions for Audio Log " + this.getName() );
 	}
 
 
 	@Override
 	public void validateFileType(File fileName) {
-		
+
+		boolean match = false;
 
 		for (int i = 0; i < VALID_FILE_TYPE.length; i++) {
 			
-			if ( VALID_FILE_TYPE[i].equals(fileName.getFileType()) ) {
-				System.out.println("Valid filetype for log type: " + this.getType() );
-			}else{
-				System.out.println("Invalid filetype for log type: " + this.getType() );
-			}
-			
-		}
+			if (VALID_FILE_TYPE[i].equals(fileName.getFileType())) {
+				System.out.println("Accepted: compatible audio file found, Uploading...");
+				match = true;
+			}			
+		}		
+		if (match != true) {
+			System.out.println("Error: incompatible audio file detected. Please select a valid audio File");
+		}		
 	}
 	
 	@Override
@@ -90,7 +92,7 @@ public class AudioLog extends Log{
 		
 		if (fileName.getFileSize() >= MIN_FILE_SIZE && fileName.getFileSize() <= MAX_FILE_SIZE) {
 			
-			System.out.println("Audio file is valid to Attach.");	
+			System.out.println("Filesize correct: Attching Audio file. Uploading....");
 		}		
 	}
 
@@ -104,6 +106,9 @@ public class AudioLog extends Log{
 
 	public String[] getVALID_FILE_TYPE() {
 		return VALID_FILE_TYPE;
+	}
+	public String getTYPE() {
+		return TYPE;
 	}
 	
 } //END OF CLASS

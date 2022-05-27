@@ -14,8 +14,9 @@
 
 		
 	public File() {
-	
-		
+		this.fileName = null;
+		this.fileType = null;
+		this.fileSize = 0;		
 		
 	}
 
@@ -41,28 +42,28 @@
 
 	@Override
 	public void create() {
-		System.out.println( "File: " + this.fileName + "has been created.");
+		System.out.println( "Creating File: " + this.fileName + " has been created.");
 	}
 
 	@Override
 	public void update() {
-		System.out.println( "File: " + this.fileName + "has been updated.");
-		
+		System.out.println( "Updateing File: " + this.fileName + " has been updated.");		
 	}
+	
 	@Override
 	public void read() {
-		System.out.println( "Reading: " + this.fileName + " Has FileType: " + this.fileType + " Has FileSize: " + this.fileSize );
-				
+		System.out.println( "Reading File: " + this.fileName + ", FileType: " + this.fileType + ", FileSize: " + this.fileSize );				
 	}
-	@Override
-	public void delete() {
-		System.out.println( "File: " + this.fileName + "has been deleted.");		
-	}
+	
 	@Override
 	public void copy() {
-		System.out.println( "File: " + this.fileName + "has been copyed.");
-		
+		System.out.println( "Copying File: " + this.fileName + " has been copyed.");		
 	}	
+	
+	@Override
+	public void delete() {
+		System.out.println( "Deleteing File: " + this.fileName + " has been deleted.");		
+	}
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;

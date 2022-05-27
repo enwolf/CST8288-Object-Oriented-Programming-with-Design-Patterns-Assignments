@@ -10,9 +10,10 @@ import java.sql.Timestamp;
 import java.sql.Date;
 
 public class TextLog extends Log {
-
+	
+	private final String TYPE = "TEXT";
 	private final int MIN_FILE_SIZE = 1;
-	private final int MAX_FILE_SIZE = 10;
+	private final int MAX_FILE_SIZE = 25;
 	private final String VALID_FILE_TYPE[] = {".txt" , ".doc" ,".pdf" };
 	private String language;
 	
@@ -46,11 +47,11 @@ public class TextLog extends Log {
 	}	
 		
 	public TextLog(int ID, String uniqueShortCode, String name, Date date, Timestamp timeStamp, String description, String type) {
-		super(ID, uniqueShortCode, name, date, timeStamp, description, type);
+		super(ID, uniqueShortCode, name, date, timeStamp, description);
 	}
 	
 	public TextLog(int ID, String uniqueShortCode, String name, Date date, Timestamp timeStamp, String description, String type, File attachFile){
-		super(ID, uniqueShortCode, name, date, timeStamp, description, type, attachFile);		
+		super(ID, uniqueShortCode, name, date, timeStamp, description, attachFile);		
 	}
 	
 	//CONSTRUCTOR START
@@ -61,17 +62,19 @@ public class TextLog extends Log {
 		
 	@Override
 	public void validateFileType(File fileName) {
-		
+
+		boolean match = false;
 
 		for (int i = 0; i < VALID_FILE_TYPE.length; i++) {
 			
-			if ( VALID_FILE_TYPE[i].equals(fileName.getFileType()) ) {
-				System.out.println("Valid filetype for log type: " + this.getType() );
-			}else{
-				System.out.println("Invalid filetype for log type: " + this.getType() );
-			}
-			
-		}
+			if (VALID_FILE_TYPE[i].equals(fileName.getFileType())) {
+				System.out.println("Accepted: compatible text file found, Uploading...");
+				match = true;
+			}			
+		}		
+		if (match != true) {
+			System.out.println("Error: incompatible text file detected. Please select a valid text File");
+		}		
 	}
 	
 	@Override
@@ -87,8 +90,12 @@ public class TextLog extends Log {
 		
 		if (fileName.getFileSize() >= MIN_FILE_SIZE && fileName.getFileSize() <= MAX_FILE_SIZE) {
 			
-			System.out.println("Text file is valid to Attach.");	
+			System.out.println("Filesize correct: Attching Text file. Uploading....");	
 		}		
+	}
+
+	public String getTYPE() {
+		return TYPE;
 	}
 	
 } //END OF CLASS
