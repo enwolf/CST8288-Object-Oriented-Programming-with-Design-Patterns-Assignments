@@ -6,7 +6,6 @@
 
 */
 
-
 public interface FileInterface {
 
 	public void create();
@@ -14,6 +13,5 @@ public interface FileInterface {
 	public void read();
 	public void delete();
 	public void copy();
-	
 	
 } //END OF CLASS
