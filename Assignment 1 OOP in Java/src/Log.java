@@ -24,7 +24,7 @@ public abstract class Log implements LogInterface{
 	
 	Log(){
 		this.ID = 0;
-		this.uniqueShortCode = null;
+		this.uniqueShortCode = "abc-abc-abc";
 		this.name = null;
 		this.date = null;
 		this.description = null;
@@ -140,6 +140,7 @@ public abstract class Log implements LogInterface{
 	
 	@Override
 	public abstract void validateFileSize(File filename);
+
 	//ABSTRACT METHODS END	
 		
 	//SETTERS START

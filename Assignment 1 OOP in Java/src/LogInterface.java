@@ -12,7 +12,6 @@ public interface LogInterface {
 	public void read();
 	public void update();
 	public void delete();
-	
 	public void atttachFile(File fileName);
 	public void generateUSC(); 	// USC = UniqueShortCode formated as "abc-abc-abc"
 	public void generateLogID();
