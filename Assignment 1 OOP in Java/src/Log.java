@@ -9,7 +9,7 @@
 import java.sql.Timestamp;
 import java.sql.Date;
 
-public abstract class Log implements LogInterface{
+public abstract class Log implements CRUDInterface{
 
 	
 	private int ID;
@@ -105,24 +105,24 @@ public abstract class Log implements LogInterface{
 		System.out.println( "Deleteing Log: \nLog ID: " + this.ID + "\nLog USC " + this.uniqueShortCode +  "\nLog Name: " + this.name + "\nDeleted() Compelate.\n" );
 	}
 		
-	@Override
+	
 	public void generateUSC() {
 		System.out.println( "Generating Unique Short Code in formate 'abc-abc-abc' " + " for " + this.name + "\n" );		
 	}
 
-	@Override
+	
 	public void generateLogID() {
 		System.out.println( "Generating ID value for Log: " + this.name  + "\n" );
 		
 	}
 	
-	@Override
+	
 	public void generateTimeStamp() {		
 		Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
 		System.out.println( "Generating Timestamp: " + timeStamp + " attaching to Log \nLog Name: " + this.name + "\nWith Log ID: " + this.ID +  "\nWith Log USC: " + this.uniqueShortCode + "\n" );		
 	}	
 	
-	@Override
+	
 	public void atttachFile(File fileName) {
 		
 		//super dirty way to avoid having to handle a NullPointerException error.  
@@ -135,10 +135,8 @@ public abstract class Log implements LogInterface{
 	}
 
 	//ABSTRACT METHODS START
-	@Override
-	public abstract void validateFileType(File filename);
 	
-	@Override
+	public abstract void validateFileType(File filename);
 	public abstract void validateFileSize(File filename);
 
 	//ABSTRACT METHODS END	

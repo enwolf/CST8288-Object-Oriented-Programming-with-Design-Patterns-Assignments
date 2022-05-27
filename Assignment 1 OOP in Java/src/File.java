@@ -6,7 +6,7 @@
 	Objective: To demonstrate principles of OOP with java specifically: Inheritance, Polymorphism, Abstraction, Encapsulation and Composition
 */
 
- public abstract class File implements FileInterface{
+ public abstract class File implements CRUDInterface{
 
 	private String fileName;
 	private String fileType;
@@ -56,13 +56,12 @@
 	}
 	
 	@Override
-	public void copy() {
-		System.out.println( "Copying File: " + this.fileName + " has been copyed.");		
-	}	
-	
-	@Override
 	public void delete() {
 		System.out.println( "Deleteing File: " + this.fileName + " has been deleted.");		
+	}
+	
+	public void copy() {
+		System.out.println( "Copying File: " + this.fileName + " has been copyed.");		
 	}
 
 	public void setFileName(String fileName) {
