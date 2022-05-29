@@ -15,6 +15,7 @@ public class VideoLog extends Log{
 	private final int MIN_FILE_SIZE = 100;
 	private final int MAX_FILE_SIZE = 999;
 	private final String VALID_FILE_TYPE[] = {".mp4" , ".mov", ".mpeg" , ".avi", ".gp3" };
+	private String videoCaption; 
 	
 	//CONSTRUCTOR START	
 	public VideoLog() {	}

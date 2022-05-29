@@ -36,12 +36,13 @@ public class VideoFile extends File{
 		super(fileName, fileType );
 		this.videoCaption = videoCaption;		
 	}		
-	//CONSTRUCTOR END
 
 	public VideoFile(String fileName, String fileType, int fileSize, String videoCaption) {
 		super(fileName, fileType, fileSize);
 		this.videoCaption = videoCaption;
 	}
+	
+	//CONSTRUCTOR END
 	
 	//GETTER SETTERS START
 	public String getVideoCaption() {

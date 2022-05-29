@@ -14,6 +14,7 @@ public class AudioLog extends Log{
 	private final int MIN_FILE_SIZE = 50;
 	private final int MAX_FILE_SIZE = 200;
 	private final String VALID_FILE_TYPE[] = {".mp3" , ".ogg" ,".gp3" };
+	private String AudioCaption;
 	
 	//CONSTRUCTOR START
 	public AudioLog() {		
