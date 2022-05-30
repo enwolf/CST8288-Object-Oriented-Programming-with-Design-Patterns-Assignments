@@ -15,6 +15,5 @@ public class main {
 		Recording myRecording = new Recording(UUID.randomUUID(),"TestFile", ".mp4", (long) 2000, "GCLOUD"  );
 		CCWorker myWorker = new CCWorker(myRecording);
 		myWorker.run();
-	}
 
 }
