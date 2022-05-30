@@ -18,17 +18,16 @@ public class Recording {
 	
 	
 	public Recording() {		
-		
 		this.ID = UUID.randomUUID();
 	}
 	
-	public Recording(UUID ID, String fileName, String fileType, Long fileSize, String closedCatption) {
+	public Recording(UUID ID, String fileName, String fileType, Long fileSize){
 		
 		this.ID = ID;
 		this.fileName = fileName;
 		this.fileType = fileType;
 		this.fileSize = fileSize;
-		this.closedCatption = closedCatption;
+		
 	}
 	
 	//SETTERS START
