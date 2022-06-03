@@ -21,7 +21,7 @@ public class Recording {
 		this.ID = UUID.randomUUID();
 	}
 	
-	public Recording(UUID ID, String fileName, String fileType, Long fileSize, String encoding){		
+	public Recording(UUID ID, String fileName, String fileType, Long fileSize, String CCEncoding){		
 		this.ID = ID;
 		this.fileName = fileName;
 		this.fileType = fileType;
@@ -42,6 +42,11 @@ public class Recording {
 	public void setFileSize(Long fileSize) {
 		this.fileSize = fileSize;
 	}
+	
+	public void setEncoding(String CCencoding) {
+		this.CCEncoding = CCencoding;
+	}
+	
 	public void setClosedCatption(String closedCatption) {
 		this.closedCatption = closedCatption;
 	}
@@ -70,9 +75,7 @@ public class Recording {
 		return CCEncoding;
 	}
 
-	public void setEncoding(String CCencoding) {
-		this.CCEncoding = CCencoding;
-	}
+
 	
 	//GETTERS END
 

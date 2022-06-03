@@ -1,4 +1,3 @@
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -13,43 +12,23 @@ import java.util.concurrent.Executors;
 public class CCController  {
 	
 	private final int CONCURRENT_THREAD_COUNT = 5;
-	private ExecutorService controller = Executors.newFixedThreadPool(CONCURRENT_THREAD_COUNT);
+	private final ExecutorService CONTROLLER = Executors.newFixedThreadPool(CONCURRENT_THREAD_COUNT);
 	
-	
-	
+		
 	CCController(){
 		
 	}
-	
-	
-	
-	
-	public void processThread (Recording recording, String encodingService) {
-		
-				
-				Runnable fileToProcess = new CCWorker(recording);
 
-				//TODO Finish writing this method. Reference the Spooler print out
-				//Then complete this task and set up your proper test case in main.java
-				//You might not need the staring in the processThread signature.
-		
+	public void processThread (Recording recording) {
 				
-		
-		
-		
-		controller.execute(null);
-		
-		
-		
+				Runnable fileToProcess = new CCWorker(recording);				
+				CONTROLLER.execute(fileToProcess);				
+	}	
+	
+	public void shutDownController() {
+
+		CONTROLLER.shutdown();
 	}
 	
-	
-	
-	
-
-	
-	
-	
-	
-	
 }
+

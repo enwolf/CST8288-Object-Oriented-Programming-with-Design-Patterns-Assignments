@@ -27,7 +27,7 @@ public class CCWorker implements Runnable{
 	@Override
 	public void run() {
 		
-		System.out.println("Current Thread: " + Thread.currentThread().getName() + "\nProcessing: " + RECORDING.getFileName() + " sending to " + RECORDING.getEncoding() + " to generate closed captions....."   );
+		System.out.println("\nCurrent Thread: " + Thread.currentThread().getName() + "\nProcessing: " + RECORDING.getFileName() + " sending to " + RECORDING.getEncoding() + " to generate closed captions....."   );
 		processRecording();
 		
 	}			
@@ -39,10 +39,8 @@ public class CCWorker implements Runnable{
 	 *
 	 */
 	
-	
 	public void processRecording() {
 		
-		float seconds = this.getRECORDING().getFileSize() / 1000 ;
 		String cloudServiceProvider;
 		String ccFileName = "processedClosedCaption.srt";
 					
@@ -53,12 +51,13 @@ public class CCWorker implements Runnable{
 		
 		try {
 				
-				Thread.sleep(1000);
-				System.out.println(cloudServiceProvider + " has started closedCaptioningGeneration() processing will be compleate in " + seconds + " seconds.\nAnalyzing.....");
+				
+				System.out.println("\n"+cloudServiceProvider + " has started closedCaptioningGeneration()\nAnalyzing.....");
 				System.out.println("File ID: " + RECORDING.getID() + "\nFile Name: " + RECORDING.getFileName()+RECORDING.getFileType());				
 				Thread.sleep(RECORDING.getFileSize());
 				RECORDING.setClosedCatption(ccFileName);
-				System.out.println("Processing Complete." + "\nAttaching CC file: " + RECORDING.getClosedCatption() +"\nEnding Current Thread: " + Thread.currentThread().getName()+"\n");
+				System.out.println("Processing Complete." + "\nAttaching CC file: " + RECORDING.getClosedCatption() +"\nReleaseing Current Thread: " + Thread.currentThread().getName()+"\n");
+				
 				
 		}catch(InterruptedException e){
 			System.out.println("wooops!!!");
