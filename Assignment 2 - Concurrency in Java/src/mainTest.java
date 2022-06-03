@@ -11,15 +11,23 @@ import java.util.UUID;
 */
 
 public class mainTest{
-
+	
+	
+	
 	public static void main(String[] args) {
 			
+		int numberOfThreads = 15;
+		
+		CCController controller = new  CCController();		
 		//List to hold Recording Generated
+		
 		//Loop to generating recording object and store as Linked List		
+				
 		
 		List<Recording> recordingList = new LinkedList<Recording>();
+		
 		// Set the mock-up recordings.
-		for (int i = 1; i < 15; i++) {
+		for (int i = 1; i < numberOfThreads; i++) {
 			
 			String fileName = "Recording_" + String.valueOf(i);
 			Long fileSize = (long) (Math.random() * (3024L - 1L));
@@ -35,14 +43,19 @@ public class mainTest{
 			recordingList.add(new Recording(UUID.randomUUID(), fileName, fileType, fileSize, CCEncodingService));
 		}
 		
-		CCController controller = new  CCController();
+		
 		
 		//For each loop using lambda notation
 		recordingList.forEach((recording) -> {			
-			controller.processThread(recording);			
+			controller.processThread(recording);
+			
+			
 		});
 		
-		controller.shutDownController();	
+		controller.shutdown(numberOfThreads);
+			
 	}	
+	
+	
 
 }

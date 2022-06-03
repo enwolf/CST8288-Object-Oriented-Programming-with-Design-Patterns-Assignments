@@ -24,10 +24,17 @@ public class CCController  {
 				CONTROLLER.execute(fileToProcess);				
 	}	
 	
-	public void shutDownController() {
-
+	public void shutdown(int i) {
+		
 		CONTROLLER.shutdown();
+		//Waits for all threads to be shutdown before printing final sys.out.msg
+		while (!CONTROLLER.isTerminated()) {
+			
+		}		System.out.println("Closed Caption procesing Compleate...\nAll " + i + " Threads Resolved. Shutting Down.... ");
+
+		
 	}
+	
 	 
 }
 
