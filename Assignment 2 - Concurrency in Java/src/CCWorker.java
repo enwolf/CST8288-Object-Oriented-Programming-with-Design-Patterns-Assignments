@@ -20,7 +20,6 @@ public class CCWorker implements Runnable{
 		
 		
 	}	
-
 	
 	// This is what execute's when we run our thread. Consider this like main{} if that helps.
 	

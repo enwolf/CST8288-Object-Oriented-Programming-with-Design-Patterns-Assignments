@@ -21,20 +21,17 @@ public class mainTest{
 		// Set the mock-up recordings.
 		for (int i = 1; i < 15; i++) {
 			
-			
 			String fileName = "Recording_" + String.valueOf(i);
 			Long fileSize = (long) (Math.random() * (3024L - 1L));
 			String fileType = ".mp4";
 			String CCEncodingService ="";
 						
-			if(i % 2 == 0)
-			{
-				
-				CCEncodingService = "GCloud";}
-			else { 
-				
+			if(i % 2 == 0){				
+				CCEncodingService = "GCloud";
+			}else{				
 				CCEncodingService = "AWS";				
 			}
+			
 			recordingList.add(new Recording(UUID.randomUUID(), fileName, fileType, fileSize, CCEncodingService));
 		}
 		

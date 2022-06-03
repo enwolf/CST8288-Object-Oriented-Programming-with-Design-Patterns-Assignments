@@ -41,19 +41,17 @@ public class Recording {
 	}
 	public void setFileSize(Long fileSize) {
 		this.fileSize = fileSize;
-	}
-	
+	}	
 	public void setEncoding(String CCencoding) {
 		this.CCEncoding = CCencoding;
-	}
-	
+	}	
 	public void setClosedCatption(String closedCatption) {
 		this.closedCatption = closedCatption;
 	}
 	
 	//SETTERS END
 	
-	
+
 	//GETTERS START	
 	public UUID getID() {
 		return ID;
@@ -70,13 +68,10 @@ public class Recording {
 	public String getClosedCatption() {
 		return closedCatption;
 	}
-
 	public String getEncoding() {
 		return CCEncoding;
 	}
-
-
 	
 	//GETTERS END
 
-}
+}//END OF CLASS

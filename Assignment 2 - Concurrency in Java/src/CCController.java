@@ -14,7 +14,6 @@ public class CCController  {
 	private final int CONCURRENT_THREAD_COUNT = 5;
 	private final ExecutorService CONTROLLER = Executors.newFixedThreadPool(CONCURRENT_THREAD_COUNT);
 	
-		
 	CCController(){
 		
 	}
