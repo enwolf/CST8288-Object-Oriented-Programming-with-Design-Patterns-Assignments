@@ -11,30 +11,33 @@ import java.util.concurrent.Executors;
 
 public class CCController  {
 	
-	private final int CONCURRENT_THREAD_COUNT = 5;
-	private final ExecutorService CONTROLLER = Executors.newFixedThreadPool(CONCURRENT_THREAD_COUNT);
+	private int concurrentThreadCount = 5;
+	private ExecutorService controller = Executors.newFixedThreadPool(concurrentThreadCount);
 	
 	CCController(){
 		
 	}
+	
+	CCController(int concurrentThreadCount){
+		this.concurrentThreadCount = concurrentThreadCount;
+	}
 
 	public void processThread (Recording recording) {
-				
-				Runnable fileToProcess = new CCWorker(recording);				
-				CONTROLLER.execute(fileToProcess);				
+		//CCWorker is a Runnable Object as it implements the Runnable interface.		
+		CCWorker fileToProcess = new CCWorker(recording);				
+		controller.execute(fileToProcess);				
 	}	
 	
 	public void shutdown(int i) {
 		
-		CONTROLLER.shutdown();
-		//Waits for all threads to be shutdown before printing final sys.out.msg
-		while (!CONTROLLER.isTerminated()) {
-			
-		}		System.out.println("Closed Caption procesing Compleate...\nAll " + i + " Threads Resolved. Shutting Down.... ");
-
+		controller.shutdown();
+		//Waits for all threads to be shutdown before printing final sys.out msg
+		while (!controller.isTerminated()){			
 		
-	}
-	
-	 
-}
+		}
+		
+		System.out.println("Closed Caption Procesing Compleate...\nAll " + i + "# Threads Resolved...\nShutting Down.... ");		
+	}	 
+
+}//END OF CLASS
 
