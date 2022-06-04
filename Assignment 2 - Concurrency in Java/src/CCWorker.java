@@ -8,17 +8,13 @@
 
 public class CCWorker implements Runnable{
 
-	private final Recording RECORDING;
+	private final Recording RECORDING;	
 	
+	//Without this constructor ensuring that FINAL VARIABLES were set I would have had to initialize it. 
+	//Not a 100% sure if these need to be FINAL but I suspect we don't want the values to ever change while any threads is running.
 	
-
-	//Without this constructor ensuring that FINAL VARIABLES were set I would have had to initialize both of them. 
-	//Not a 100% sure if these need to be FINAL but I suspect we don't want there values to ever change while in a thread.
-	public CCWorker(Recording RECORDING)
-	{
-		this.RECORDING = RECORDING;
-		
-		
+	public CCWorker(Recording RECORDING){
+		this.RECORDING = RECORDING;		
 	}	
 	
 	// This is what execute's when we run our thread. Consider this like main{} if that helps.
@@ -27,8 +23,7 @@ public class CCWorker implements Runnable{
 	public void run() {
 		
 		System.out.println("\nCurrent Thread: " + Thread.currentThread().getName() + "\nProcessing: " + RECORDING.getFileName() + " sending to " + RECORDING.getEncoding() + " to generate closed captions....."   );
-		processRecording();
-		
+		processRecording();		
 	}			
 	
 	 /*
@@ -38,37 +33,34 @@ public class CCWorker implements Runnable{
 	 *
 	 */
 	
-	public void processRecording() {
+	public void processRecording(){
 		
 		String cloudServiceProvider;
 		String ccFileName = "processedClosedCaption.srt";
 					
 		if (RECORDING.getEncoding().equals("AWS") )
-			 cloudServiceProvider = "Amazone Web Services";
+			 cloudServiceProvider = "Amazon Web Services";
 		else 
 			 cloudServiceProvider = "Google Cloud";		
 		
-		try {
-				
-				
-				System.out.println("\n"+cloudServiceProvider + " has started closedCaptioningGeneration()\nAnalyzing.....");
-				System.out.println("File ID: " + RECORDING.getID() + "\nFile Name: " + RECORDING.getFileName()+RECORDING.getFileType());				
-				Thread.sleep(RECORDING.getFileSize());
-				RECORDING.setClosedCatption(ccFileName);
-				System.out.println("Processing Complete." + "\nAttaching CC file: " + RECORDING.getClosedCatption() +"\nReleaseing Current Thread: " + Thread.currentThread().getName()+"\n");
-				
+		try {		
+			
+			System.out.println("\n"+cloudServiceProvider + " has started closedCaptioningGeneration()\nAnalyzing.....");
+			System.out.println("File ID: " + RECORDING.getID() + "\nFile Name: " + RECORDING.getFileName() + RECORDING.getFileType());			
+			Thread.sleep(RECORDING.getFileSize());
+			RECORDING.setClosedCatption(ccFileName);
+			System.out.println("Processing Complete: " + RECORDING.getFileName() + RECORDING.getFileType() + "\nAttaching CC file: " + RECORDING.getClosedCatption() +"\nReleaseing Current Thread: " + Thread.currentThread().getName()+"\n");				
 				
 		}catch(InterruptedException e){
-			System.out.println("wooops!!!");
+			
 			e.printStackTrace();
 		}		
-	}
-	
+	}	
 	
 	//GETTERS
 	public Recording getRECORDING() {
 		return RECORDING;
-	}	
-	
+		
+	}		
  
-}//END OF CLASS
+} //END OF CLASS
