@@ -9,8 +9,8 @@ public class DBConnection {
     // CREATE TABLE logs (uuid CHAR(40) NOT NULL PRIMARY KEY, title CHAR(128),
     // content TEXT, createTimestamp Date);
 
-    private static final String dbUser = "root";
-    private static final String dbPassword = "";
+    private static final String DB_USER = "root";
+    private static final String DB_PASSWORD = "";
 
     public static Connection getConnectionToDatabase() {
         Connection connection = null;
