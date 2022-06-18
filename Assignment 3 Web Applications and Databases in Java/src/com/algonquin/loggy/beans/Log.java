@@ -1,40 +1,41 @@
 package com.algonquin.loggy.beans;
 
-import java.time.LocalDateTime;
+
+
 import java.util.Date;
 import java.util.UUID;
 
 public abstract class Log {
     
 
-	private UUID id;
+	private String ID;
     private String title;
     private String content;
-    private LocalDateTime timeStamp;
+    private Date timeStamp;
     
     Log(){
-    	this.id = UUID.randomUUID();
+    	this.ID = UUID.randomUUID().toString();
     	
     }
     
 	public Log(String title, String content) {
-		this.id = UUID.randomUUID();
+		this.ID = UUID.randomUUID().toString();
 		this.title = title;
 		this.content = content;
 	}
     
-	public Log(String title, String content, LocalDateTime timeStamp) {
-		this.id = UUID.randomUUID();
+	public Log(String title, String content, Date timeStamp) {
+		this.ID = UUID.randomUUID().toString();
 		this.title = title;
 		this.content = content;
 		this.timeStamp = timeStamp;
 	}
 	
-	public UUID getId() {
-		return id;
+	public String getId() {
+		return ID;
 	}
-	public void setId(UUID id) {
-		this.id = id;
+	public void setId(String ID) {
+		this.ID = ID;
 	}
 	public String getTitle() {
 		return title;
@@ -48,10 +49,10 @@ public abstract class Log {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public LocalDateTime getTimeStamp() {
+	public Date getTimestamp() {
 		return timeStamp;
 	}
-	public void setTimeStamp(LocalDateTime timeStamp) {
+	public void setTimestamp(Date timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 

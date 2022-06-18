@@ -1,6 +1,7 @@
 package com.algonquin.loggy.beans;
 
-import java.time.LocalDateTime;
+
+import java.util.Date;
 
 public class TextLog extends Log {
 
@@ -14,11 +15,10 @@ public class TextLog extends Log {
 		
 	}
 
-	public TextLog(String title, String content, LocalDateTime timeStamp) {
+	public TextLog(String title, String content, Date timeStamp) {
 		super(title, content, timeStamp);
 		
-	}
-
+	}	
 	
 	
 	
