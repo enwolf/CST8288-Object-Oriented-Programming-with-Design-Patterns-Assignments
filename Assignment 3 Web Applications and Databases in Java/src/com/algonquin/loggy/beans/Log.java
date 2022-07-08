@@ -11,7 +11,7 @@ public abstract class Log {
 	private String ID;
     private String title;
     private String content;
-    private Date timeStamp;
+    private Date timestamp;
     
     Log(){
     	this.ID = UUID.randomUUID().toString();
@@ -28,7 +28,7 @@ public abstract class Log {
 		this.ID = UUID.randomUUID().toString();
 		this.title = title;
 		this.content = content;
-		this.timeStamp = timeStamp;
+		this.timestamp = timeStamp;
 	}
 	
 	public String getId() {
@@ -50,10 +50,10 @@ public abstract class Log {
 		this.content = content;
 	}
 	public Date getTimestamp() {
-		return timeStamp;
+		return timestamp;
 	}
 	public void setTimestamp(Date timeStamp) {
-		this.timeStamp = timeStamp;
+		this.timestamp = timeStamp;
 	}
 
 }

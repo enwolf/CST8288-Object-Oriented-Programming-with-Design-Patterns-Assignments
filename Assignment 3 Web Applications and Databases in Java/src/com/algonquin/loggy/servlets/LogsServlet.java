@@ -29,6 +29,7 @@ public class LogsServlet extends HttpServlet {
     
     private List<TextLog> getTextLogArray = new ArrayList<TextLog>();
     String hrefLocalPath = "http://localhost:8080/Assignment_3_Web_Applications_and_Databases_in_Java/logs";
+    String userResponseMessage = "";
 
 
 	@Override
@@ -42,9 +43,7 @@ public class LogsServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
-    	handlePost(request, response);
-		
+		handlePost(request, response);
 		
 	}
     
@@ -66,7 +65,9 @@ public class LogsServlet extends HttpServlet {
     	
     	String logToDeleteURL =  request.getParameter("delete");
     	
+    	
     	if (logToDeleteURL != null) {
+    		userResponseMessage = "Log Deleted";
     		ApplicationDao myDao = new ApplicationDao();
     		String responseMessage = "LogID = "+  logToDeleteURL.substring(0, 8) + " was sucesffuly deleted.";
 
@@ -118,40 +119,28 @@ public class LogsServlet extends HttpServlet {
     	
     	if (logToEditURL != null) {
     		
+    		userResponseMessage = "Editing Log";	
     		drawGetEditHTML(writer,getTextLogArray,logToEdit, logToEditURL);
+    		userResponseMessage = "Updated Log";
 		
     	}else{
-    		
-    		drawGetLoadHTML(writer,getTextLogArray,"");
+    		 
+    			 	
+    		drawGetLoadHTML(writer,getTextLogArray);
 
 		
     }
     	
 }//End of method
     public void drawGetEditHTML(PrintWriter writer, List<TextLog> getTextLogArray, TextLog logToEdit, String logToEditURL) {
-    	
-   		writer.write("<html>");
-		writer.write("<head>"); 
-		writer.write("<title>Log's Be Here</title>");
-		writer.write("</head>");
-		writer.write("<body>");
-			writer.write("<h1>Log's Be Here</h1>");
-			writer.write("<table padding: 15px;>");
-				writer.write("<tr style='font-size: 25px;'>");
-					writer.write("<th>#</th>");
-					writer.write("<th>Title</th>");
-					writer.write("<th>Content</th>");
-					writer.write("<th>TimeStamp</th>");
-					writer.write("<th>Action</th>");
-				writer.write("</tr>");
-				
+    				
 	    		writer.write("<html>");
 				writer.write("<head>"); 
 				writer.write("<title>Log's Be Here</title>");
 				writer.write("</head>");
 				writer.write("<body>");
-				writer.write("<h1>Edit Log's Here</h1>");
-				writer.write("<h2>LogId = "+ logToEditURL + "</h2>");
+				writer.write("<h1>Log's Be Here</h1>");
+				writer.write("<h2 color: red;>"+ userResponseMessage + "</h2>");
 				writer.write("<form method='post'>");
 				writer.write("<label for='title'>Title:</label>");
 				writer.write("<br>");
@@ -166,6 +155,14 @@ public class LogsServlet extends HttpServlet {
 				writer.write("<input type='submit' value='Submit'>");
 				writer.write("<input type='reset' value='Cancel'>");
 				writer.write("</form>");
+				writer.write("<table>");
+				writer.write("<tr style='font-size: 25px;'>");
+					writer.write("<th>#</th>");
+					writer.write("<th>Title</th>");
+					writer.write("<th>Content</th>");
+					//writer.write("<th>TimeStamp</th>");
+					writer.write("<th>Action</th>");
+				writer.write("</tr>");
 								
 	for (int i = 0; i < getTextLogArray.size(); i++) {
 				    					
@@ -173,19 +170,20 @@ public class LogsServlet extends HttpServlet {
 					writer.write("<td>" + getTextLogArray.get(i).getId().toString().substring(0, 8) + "</td>");
 					writer.write("<td>" + getTextLogArray.get(i).getTitle() + "</td>");
 					writer.write("<td>" + getTextLogArray.get(i).getContent() + "</td>");
-					writer.write("<td>" + getTextLogArray.get(i).getTimestamp() + "</td>");
-					//writer.write("<td>" + myDateFormat.format(txtLogArray.get(i).getTimeStamp()) + "</td>");
+					//writer.write("<td>" + getTextLogArray.get(i).getTimestamp() + "</td>");
 					writer.write("<td><a href='" + hrefLocalPath + "?edit=" + getTextLogArray.get(i).getId() + "'>Edit</a> | <a href='" + hrefLocalPath + "?delete=" + getTextLogArray.get(i).getId() + "'>Delete</a></td>");
 				writer.write("</tr>");
 	}    								
 	
 			writer.write("</table>");
 		writer.write("</body>");
-	writer.write("</html>");  
+	writer.write("</html>");
+	
+	userResponseMessage ="";
     	
     }
         
-    public void drawGetLoadHTML(PrintWriter writer, List<TextLog> getTextLogArray, String responseMsg) {
+    public void drawGetLoadHTML(PrintWriter writer, List<TextLog> getTextLogArray) {
     	
    		writer.write("<html>");
 		writer.write("<head>"); 
@@ -193,7 +191,7 @@ public class LogsServlet extends HttpServlet {
 		writer.write("</head>");
 		writer.write("<body>");
 			writer.write("<h1>Log's Be Here</h1>");
-			writer.write("<h2>  Log count:" + getTextLogArray.size() + " HandleGet</h2>"); 		//this will have to be updated once you add remove functionality. 
+			writer.write("<h2> " + userResponseMessage +"</h2>"); 		 
 				writer.write("<form method='post'>");
 					writer.write("<label for='title'>Title:</label>");
 					writer.write("<br>");
@@ -213,7 +211,7 @@ public class LogsServlet extends HttpServlet {
 						writer.write("<th>#</th>");
 						writer.write("<th>Title</th>");
 						writer.write("<th>Content</th>");
-						writer.write("<th>TimeStamp</th>");
+						//writer.write("<th>TimeStamp</th>");
 						writer.write("<th>Action</th>");
 					writer.write("</tr>");
 									
@@ -223,7 +221,7 @@ public class LogsServlet extends HttpServlet {
 							writer.write("<td>" + getTextLogArray.get(i).getId().toString().substring(0, 8) + "</td>");
 							writer.write("<td>" + getTextLogArray.get(i).getTitle() + "</td>");
 							writer.write("<td>" + getTextLogArray.get(i).getContent() + "</td>");
-							writer.write("<td>" + getTextLogArray.get(i).getTimestamp() + "</td>");
+							//writer.write("<td>" + getTextLogArray.get(i).getTimestamp() + "</td>");
 							//writer.write("<td>" + myDateFormat.format(txtLogArray.get(i).getTimeStamp()) + "</td>");
 							writer.write("<td><a href='" + hrefLocalPath + "?edit=" + getTextLogArray.get(i).getId() + "'>Edit</a> | <a href='" + hrefLocalPath + "?delete=" + getTextLogArray.get(i).getId() + "'>Delete</a></td>");
 						writer.write("</tr>");
@@ -232,7 +230,9 @@ public class LogsServlet extends HttpServlet {
 		
 				writer.write("</table>");
 			writer.write("</body>");
-		writer.write("</html>");  
+		writer.write("</html>");
+		
+		userResponseMessage ="";
     	
     }
         
@@ -257,6 +257,7 @@ public class LogsServlet extends HttpServlet {
     	
     	ServletContext servletContext = request.getServletContext();
     	response.setContentType("text/html;charset=UTF-8");
+    	
     	List<TextLog> txtLogArray = new ArrayList<TextLog>();
     	ApplicationDao myDao = new ApplicationDao(); //object to pass and pull data from database.
 		
@@ -271,11 +272,12 @@ public class LogsServlet extends HttpServlet {
 		PrintWriter writer = response.getWriter();
     	
     	if(logToEditURL!=null) {
-    	
+    			userResponseMessage = "Log has been updated";
 				myDao.updateTextLogInDatabase(logToEditURL, title, content);
 				handleGetHTMLLoad(request, response);
 	
     	}else{
+    		userResponseMessage = "New Log created";
     		
     		TextLog txtLogObj = new TextLog(title,content,timeStamp);
    			myDao.addTextLogToDatabase(txtLogObj);
@@ -292,7 +294,7 @@ public class LogsServlet extends HttpServlet {
     		writer.write("</head>");
     		writer.write("<body>");
     		writer.write("<h1>Log's Be Here</h1>");
-    		writer.write("<h2>Log #" + txtLogArray.size() +" created: HandlePost</h2>"); 		//this will have to be updated once you add remove functionality. 
+    		writer.write("<h2>" + userResponseMessage + "</h2>"); 		//this will have to be updated once you add remove functionality. 
     		writer.write("<form method='post'>");
     		writer.write("<label for='title'>Title:</label>");
     		writer.write("<br>");
@@ -312,7 +314,7 @@ public class LogsServlet extends HttpServlet {
     		writer.write("<th>#</th>");
     		writer.write("<th>Title</th>");
     		writer.write("<th>Content</th>");
-    		writer.write("<th>TimeStamp</th>");
+    		//writer.write("<th>TimeStamp</th>");
     		writer.write("<th>Action</th>");
     		writer.write("</tr>");
 
@@ -326,7 +328,7 @@ public class LogsServlet extends HttpServlet {
     			writer.write("<td>" + txtLogArray.get(i).getId().toString().substring(0, 8) + "</td>");
     			writer.write("<td>" + txtLogArray.get(i).getTitle() + "</td>");
     			writer.write("<td>" + txtLogArray.get(i).getContent() + "</td>");
-    			writer.write("<td>" + txtLogArray.get(i).getTimestamp() + "</td>");
+    			//writer.write("<td>" + txtLogArray.get(i).getTimestamp() + "</td>");
     			//writer.write("<td>" + myDateFormat.format(txtLogArray.get(i).getTimeStamp()) + "</td>");
     			writer.write("<td><a href='" + hrefLocalPath + "?edit=" + txtLogArray.get(i).getId() + "'>Edit</a> | <a href='" + hrefLocalPath + "?delete=" + txtLogArray.get(i).getId() + "'>Delete</a></td>");
     			writer.write("</tr>");
@@ -339,7 +341,7 @@ public class LogsServlet extends HttpServlet {
     		
     	}
 		
-		
+    	userResponseMessage ="";
     	
     	
     	

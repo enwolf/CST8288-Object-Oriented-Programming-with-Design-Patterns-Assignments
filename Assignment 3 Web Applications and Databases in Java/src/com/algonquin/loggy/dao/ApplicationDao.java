@@ -30,17 +30,14 @@ public class ApplicationDao implements ApplicationService {
     	TextLog txtLog = null;
     	
     	
-    	PreparedStatement sqlQueryStatement = dbConnection.prepareStatement("SELECT * FROM loggy.logs ORDER BY Timestamp ASC");
+    	PreparedStatement sqlQueryStatement = dbConnection.prepareStatement("SELECT * FROM loggy.logs ORDER BY Timestamp DESC");
     	ResultSet resultSetFromQuery = sqlQueryStatement.executeQuery();
     	    	    	
     	
     	while(resultSetFromQuery.next()){
     		
     		txtLog = new TextLog();
-    		
-    		
-    			
-    		
+    		    		
     		//resultSetFromQuery.getSTring() is selecting the column ID to pull from the Database Table
     		txtLog.setId(resultSetFromQuery.getString("UUID"));
     		txtLog.setTitle(resultSetFromQuery.getString("Title"));
