@@ -15,27 +15,33 @@ public abstract class Log implements Attachable {
 
 	// Constructors
 	public Log(String name) {
+
 		this(name, "");
 	}
 
 	public Log(String name, String description) {
+
 		this(name, description, new Date());
 	}
 
 	public Log(String name, String description, Date date) {
+
 		this.name = name;
 		this.description = description;
 		this.date = date;
 		this.uuid = UUID.randomUUID();
 		this.code = shortCode();
+
 	}
 
 	public Log() {
+
 		this.name = null;
 		this.description = null;
 		this.date = null;
 		this.uuid = null;
 		this.code = null;
+
 	}
 
 	// constructors end
