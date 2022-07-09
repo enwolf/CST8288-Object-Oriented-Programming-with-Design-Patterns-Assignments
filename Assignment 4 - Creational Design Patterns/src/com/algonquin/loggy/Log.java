@@ -1,7 +1,6 @@
 package com.algonquin.loggy;
 
 import java.util.Date;
-import java.util.Random;
 import java.util.UUID;
 
 public abstract class Log implements Attachable {
@@ -12,6 +11,7 @@ public abstract class Log implements Attachable {
 	private UUID uuid;
 	private String code;
 	private File attachment;
+	ShortCodeGenerator shortCodeGenerator = ShortCodeGenerator.getInstance();
 
 	// Constructors
 	public Log(String name) {
@@ -30,7 +30,7 @@ public abstract class Log implements Attachable {
 		this.description = description;
 		this.date = date;
 		this.uuid = UUID.randomUUID();
-		this.code = shortCode();
+		this.code = shortCodeGenerator.shortCode();
 
 	}
 
@@ -96,23 +96,6 @@ public abstract class Log implements Attachable {
 	@Override
 	public boolean isValidContentType(String type) {
 		return false;
-	}
-
-	private String shortCode() {
-		return randomChars(3) + "-" + randomChars(3) + "-" + randomChars(3);
-	}
-
-	private String randomChars(int n) {
-
-		String randomchars = "";
-		String chars = "abcdefghijklmnopqrstuvwxyz1234567890";
-		Random rnd = new Random();
-
-		for (int i = 0; i < n; i++) {
-			randomchars += chars.charAt(rnd.nextInt(chars.length()));
-		}
-
-		return randomchars;
 	}
 
 	// Get and Set methods start
