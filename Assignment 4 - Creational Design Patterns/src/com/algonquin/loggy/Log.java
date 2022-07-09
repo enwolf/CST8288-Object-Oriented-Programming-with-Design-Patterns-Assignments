@@ -6,138 +6,149 @@ import java.util.UUID;
 
 public abstract class Log implements Attachable {
 
-    private String name;
-    private String description;
-    private Date date;
-    private UUID uuid;
-    private String code;
-    private File attachment;
+	private String name;
+	private String description;
+	private Date date;
+	private UUID uuid;
+	private String code;
+	private File attachment;
 
-    public File getAttachment() {
-        return attachment;
-    }
+	// Constructors
+	public Log(String name) {
+		this(name, "");
+	}
 
-    public void setAttachment(File attachment) {
-        this.attachment = attachment;
-    }
+	public Log(String name, String description) {
+		this(name, description, new Date());
+	}
 
-    public void create() {
-        System.out.println("Log record for " + uuid + " has been created");
-    }
+	public Log(String name, String description, Date date) {
+		this.name = name;
+		this.description = description;
+		this.date = date;
+		this.uuid = UUID.randomUUID();
+		this.code = shortCode();
+	}
 
-    public void read() {
-        System.out.println("Log " + uuid + " name:" + name + ", description: " + description + " created on " + date);
-    }
+	public Log() {
+		this.name = null;
+		this.description = null;
+		this.date = null;
+		this.uuid = null;
+		this.code = null;
+	}
 
-    public void update(String name, String description) {
-        System.out.println("Log record for " + uuid + " has been updated");
-        this.name = name;
-        this.description = description;
-    }
+	// constructors end
 
-    public void delete() {
-        System.out.println("Log record for " + uuid + " has been deleted");
-    }
+	public void create() {
+		System.out.println("Log record for " + uuid + " has been created");
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void read() {
+		System.out.println("Log " + uuid + " name:" + name + ", description: " + description + " created on " + date);
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void update(String name, String description) {
+		System.out.println("Log record for " + uuid + " has been updated");
+		this.name = name;
+		this.description = description;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void delete() {
+		System.out.println("Log record for " + uuid + " has been deleted");
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public String toString() {
+		String out = code + ":" + name + ":" + description + ":" + date;
+		if (this.attachment != null) {
+			out += " with attachment " + this.attachment.getName();
+		}
+		return out;
+	}
 
-    public UUID getUuid() {
-        return uuid;
-    }
+	@Override
+	public void attachFile(String name, String type, String content, Long size) throws Exception {
+		if (!isValidContentType(type)) {
+			System.out.println("ContentType " + type + " can not be attached");
+			throw new Exception("ContentType " + type + " can not be attached");
+		}
+	}
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
+	@Override
+	public void attachFile(File file) throws Exception {
+		String type = file.getType();
 
-    public Date getDate() {
-        return date;
-    }
+		if (!isValidContentType(type)) {
+			System.out.println("ContentType " + type + " can not be attached");
+			throw new Exception("ContentType " + type + " can not be attached");
+		}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+		this.setAttachment(file);
+		file.postProcess();
+	}
 
-    public Log() {
-        this.name = null;
-        this.description = null;
-        this.date = null;
-        this.uuid = null;
-        this.code = null;
-    }
+	@Override
+	public boolean isValidContentType(String type) {
+		return false;
+	}
 
-    public Log(String name) {
-        this(name, "");
-    }
+	private String shortCode() {
+		return randomChars(3) + "-" + randomChars(3) + "-" + randomChars(3);
+	}
 
-    public Log(String name, String description) {
-        this(name, description, new Date());
-    }
+	private String randomChars(int n) {
 
-    public Log(String name, String description, Date date) {
-        this.name = name;
-        this.description = description;
-        this.date = date;
-        this.uuid = UUID.randomUUID();
-        this.code = shortCode();
-    }
+		String randomchars = "";
+		String chars = "abcdefghijklmnopqrstuvwxyz1234567890";
+		Random rnd = new Random();
 
-    public String toString() {
-        String out = code + ":" + name + ":" + description + ":" + date;
-        if (this.attachment != null) {
-            out += " with attachment " + this.attachment.getName();
-        }
-        return out;
-    }
+		for (int i = 0; i < n; i++) {
+			randomchars += chars.charAt(rnd.nextInt(chars.length()));
+		}
 
-    @Override
-    public void attachFile(String name, String type, String content, Long size) throws Exception {
-        if (!isValidContentType(type)) {
-            System.out.println("ContentType " + type + " can not be attached");
-            throw new Exception("ContentType " + type + " can not be attached");
-        }
-    }
+		return randomchars;
+	}
 
-    @Override
-    public void attachFile(File file) throws Exception {
-        String type = file.getType();
-        if (!isValidContentType(type)) {
-            System.out.println("ContentType " + type + " can not be attached");
-            throw new Exception("ContentType " + type + " can not be attached");
-        }
-        this.setAttachment(file);
-        file.postProcess();
-    }
+	// Get and Set methods start
+	public String getName() {
+		return name;
+	}
 
-    @Override
-    public boolean isValidContentType(String type) {
-        return false;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    private String shortCode() {
-        return randomChars(3) + "-" + randomChars(3) + "-" + randomChars(3);
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    private String randomChars(int n) {
-        String randomchars = "";
-        String chars = "abcdefghijklmnopqrstuvwxyz1234567890";
-        Random rnd = new Random();
-        for (int i = 0; i < n; i++) {
-            randomchars += chars.charAt(rnd.nextInt(chars.length()));
-        }
-        return randomchars;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public UUID getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
+	}
+
+	public File getAttachment() {
+		return attachment;
+	}
+
+	public void setAttachment(File attachment) {
+		this.attachment = attachment;
+	}
+
+	// Get and Set methods end
 }
