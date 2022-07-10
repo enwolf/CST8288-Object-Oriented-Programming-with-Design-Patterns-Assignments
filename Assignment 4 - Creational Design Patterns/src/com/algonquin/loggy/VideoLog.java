@@ -3,6 +3,7 @@ package com.algonquin.loggy;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class VideoLog extends Log {
 
@@ -12,15 +13,9 @@ public class VideoLog extends Log {
 
 	}
 
-	public VideoLog(String name, String description) {
-
-		super(name, description);
-
-	}
-
-	public VideoLog(String name, String description, Date date) {
-
-		super(name, description, date);
+	public VideoLog(UUID uuid, String code, String name, String description, Date date, File attachment) {
+		super(uuid, code, name, description, date, attachment);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

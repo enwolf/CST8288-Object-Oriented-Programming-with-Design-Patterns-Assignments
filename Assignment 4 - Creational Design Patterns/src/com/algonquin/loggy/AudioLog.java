@@ -3,6 +3,7 @@ package com.algonquin.loggy;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class AudioLog extends Log {
 
@@ -11,12 +12,8 @@ public class AudioLog extends Log {
 	public AudioLog() {
 	}
 
-	public AudioLog(String name, String description) {
-		super(name, description);
-	}
-
-	public AudioLog(String name, String description, Date date) {
-		super(name, description, date);
+	public AudioLog(UUID uuid, String code, String name, String description, Date date, File attachment) {
+		super(uuid, code, name, description, date, attachment);
 	}
 
 	@Override

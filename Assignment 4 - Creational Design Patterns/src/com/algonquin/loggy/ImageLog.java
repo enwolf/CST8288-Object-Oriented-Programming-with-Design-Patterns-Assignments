@@ -1,7 +1,9 @@
 package com.algonquin.loggy;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class ImageLog extends Log {
 
@@ -11,9 +13,8 @@ public class ImageLog extends Log {
 
 	}
 
-	public ImageLog(String name, String description) {
-
-		super(name, description);
+	public ImageLog(UUID uuid, String code, String name, String description, Date date, File attachment) {
+		super(uuid, code, name, description, date, attachment);
 	}
 
 	@Override

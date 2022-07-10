@@ -3,6 +3,7 @@ package com.algonquin.loggy;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class TextLog extends Log {
 
@@ -12,14 +13,9 @@ public class TextLog extends Log {
 
 	}
 
-	public TextLog(String name, String description) {
+	public TextLog(UUID uuid, String code, String name, String description, Date date, File attachment) {
+		super(uuid, code, name, description, date, attachment);
 
-		super(name, description);
-	}
-
-	public TextLog(String name, String description, Date date) {
-
-		super(name, description, date);
 	}
 
 	@Override
