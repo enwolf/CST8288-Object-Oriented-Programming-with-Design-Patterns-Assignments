@@ -6,4 +6,6 @@ public interface Attachable {
 
 	public void attachFile(File file) throws Exception;
 
+	boolean isValidContentType(String type);
+
 }
