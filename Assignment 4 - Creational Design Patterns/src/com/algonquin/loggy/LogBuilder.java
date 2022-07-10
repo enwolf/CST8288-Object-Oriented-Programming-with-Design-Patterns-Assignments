@@ -12,21 +12,54 @@ public class LogBuilder {
 	private Date date;
 	private File attachment;
 
+	ShortCodeGenerator shortCodeGenerator = ShortCodeGenerator.getInstance();
+
 	public LogBuilder() {
 
 	}
 
-	public LogBuilder setUUID(UUID uuid) {
+	// Was hopping to use this to generate all logs by creating a log of the type
+	// parent and then casting as need but it appears I need to create the
+	// Log.java file in a more <generic> way to be able to achieve that and since we
+	// were also asked to make Log a concrete class I was never able to change the
+	// data type of the log object to anything else no mater how hard I tried.
 
-		this.uuid = uuid;
+	public Log createLog() {
+
+		return new Log(uuid, shortCode, name, description, date, attachment);
+	}
+
+	public AudioLog createAudioLog() {
+
+		return new AudioLog(uuid, shortCode, name, description, date, attachment);
+	}
+
+	public ImageLog createImageLog() {
+
+		return new ImageLog(uuid, shortCode, name, description, date, attachment);
+	}
+
+	public TextLog createTextLog() {
+
+		return new TextLog(uuid, shortCode, name, description, date, attachment);
+	}
+
+	public VideoLog createVideoLog() {
+
+		return new VideoLog(uuid, shortCode, name, description, date, attachment);
+	}
+
+	public LogBuilder setUUID() {
+
+		this.uuid = UUID.randomUUID();
 
 		return this;
 
 	}
 
-	public LogBuilder setshortCode(String shortCode) {
+	public LogBuilder setShortCode() {
 
-		this.shortCode = shortCode;
+		this.shortCode = shortCodeGenerator.shortCode();
 
 		return this;
 
@@ -48,9 +81,9 @@ public class LogBuilder {
 
 	}
 
-	public LogBuilder setDate(Date date) {
+	public LogBuilder setDate() {
 
-		this.date = date;
+		this.date = new Date();
 
 		return this;
 
@@ -62,11 +95,6 @@ public class LogBuilder {
 
 		return this;
 
-	}
-
-	public Log createLog() {
-
-		return new Log(uuid, shortCode, name, description, date, attachment);
 	}
 
 }
