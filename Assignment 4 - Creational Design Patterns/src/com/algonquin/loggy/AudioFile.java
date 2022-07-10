@@ -1,6 +1,11 @@
 package com.algonquin.loggy;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class AudioFile extends File {
+
+	public static final List<String> contentTypes = Arrays.asList("MP3", "WAV", "AAC");
 
 	public AudioFile(String name, String type, String content, Long size) {
 
