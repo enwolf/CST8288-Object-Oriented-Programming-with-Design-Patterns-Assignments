@@ -6,19 +6,21 @@ public class LogArchitect {
 
 	}
 
-	public void buildAudioLog(LogBuilder logBuilder) {
+	public AudioLog buildAudioLog(LogBuilder logBuilder) {
+
+		return null;
 
 	}
 
-	public void buildPhotoLog(LogBuilder logBuilder) {
+	public ImageLog buildVideoLog(LogBuilder logBuilder) {
+
+		return null;
 
 	}
 
-	public void buildVideoLog(LogBuilder logBuilder) {
+	public TextLog buildTextLog(LogBuilder logBuilder) {
 
-	}
-
-	public void buildTextLog(LogBuilder logBuilder) {
+		return null;
 
 	}
 }
