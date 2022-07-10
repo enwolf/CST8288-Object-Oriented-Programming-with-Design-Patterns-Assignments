@@ -3,44 +3,37 @@ package com.algonquin.loggy;
 import java.util.Date;
 import java.util.UUID;
 
-public abstract class Log implements Attachable {
+public class Log implements Attachable {
 
+	private UUID uuid;
+	private String code;
 	private String name;
 	private String description;
 	private Date date;
-	private UUID uuid;
-	private String code;
 	private File attachment;
 	ShortCodeGenerator shortCodeGenerator = ShortCodeGenerator.getInstance();
 
 	// Constructors
-	public Log(String name) {
-
-		this(name, "");
-	}
-
-	public Log(String name, String description) {
-
-		this(name, description, new Date());
-	}
-
-	public Log(String name, String description, Date date) {
-
-		this.name = name;
-		this.description = description;
-		this.date = date;
-		this.uuid = UUID.randomUUID();
-		this.code = shortCodeGenerator.shortCode();
-
-	}
 
 	public Log() {
 
+		this.uuid = null;
 		this.name = null;
 		this.description = null;
 		this.date = null;
-		this.uuid = null;
 		this.code = null;
+		this.attachment = null;
+
+	}
+
+	public Log(UUID uuid, String code, String name, String description, Date date, File attachment) {
+
+		this.uuid = uuid;
+		this.code = code;
+		this.name = name;
+		this.date = date;
+		this.attachment = attachment;
+		this.description = description;
 
 	}
 
@@ -99,6 +92,23 @@ public abstract class Log implements Attachable {
 	}
 
 	// Get and Set methods start
+
+	public UUID getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -121,14 +131,6 @@ public abstract class Log implements Attachable {
 
 	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	public UUID getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(UUID uuid) {
-		this.uuid = uuid;
 	}
 
 	public File getAttachment() {
