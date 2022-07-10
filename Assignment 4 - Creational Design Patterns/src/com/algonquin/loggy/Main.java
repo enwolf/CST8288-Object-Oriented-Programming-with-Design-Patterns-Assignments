@@ -3,11 +3,14 @@ package com.algonquin.loggy;
 public class Main {
 
 	public static void main(String[] args) {
+		LogBuilder logBuilder = new LogBuilder();
+		LogArchitect logArch = new LogArchitect();
 
 		try {
 			// Mock-up logs with non-supported content type
-			mockLog(new ImageLog("first log", "Monday May 3, I had to wake up early"),
-					new ImageFile("image.tif", "TIF", "******", Long.valueOf(1024)));
+			mockLog(logBuilder.setUUID().setShortCode().setName("first log")
+					.setDescription("Monday May 3, I had to wake up early")
+					.setFile(new ImageFile("image.tif", "TIF", "******", Long.valueOf(1024))).createImageLog());
 		} catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage() + "\n\n");
 
@@ -15,8 +18,9 @@ public class Main {
 
 		try {
 			// Mock-up logs with incorrect attachment
-			mockLog(new TextLog("fourth log", "And even later, I need to have lunch"),
-					new TextFile("eating.png", "PNG", "******", Long.valueOf(1024)));
+			mockLog(logBuilder.setUUID().setShortCode().setName("fourth log")
+					.setDescription("And even later, I need to have lunch")
+					.setFile(new TextFile("eating.png", "PNG", "******", Long.valueOf(1024))).createTextLog());
 		} catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage() + "\n\n");
 
@@ -24,14 +28,20 @@ public class Main {
 
 		try {
 			// Mock-up logs with correct attachment
-			mockLog(new ImageLog("first log", "Monday May 4, I had to wake up early"),
-					new ImageFile("image.png", "PNG", "******", Long.valueOf(1024)));
-			mockLog(new ImageLog("second log", "Few minutes later, I had my first cup of coffee"),
-					new ImageFile("coffee.png", "PNG", "******", Long.valueOf(1024)));
-			mockLog(new VideoLog("third log", "Few minutes later, I am going for a ride"),
-					new VideoFile("biking1.mp4", "MP4", "******", Long.valueOf(1024)));
-			mockLog(new TextLog("fourth log", "And even later, I need to have lunch"),
-					new TextFile("recipie.txt", "TXT", "******", Long.valueOf(1024)));
+			mockLog(logBuilder.setUUID().setShortCode().setName("first log")
+					.setDescription("Monday May 4, I had to wake up early")
+					.setFile(new ImageFile("image.png", "PNG", "******", Long.valueOf(1024))).createImageLog());
+			mockLog(logBuilder.setUUID().setShortCode().setName("second log")
+					.setDescription("Few minutes later, I had my first cup of coffee")
+					.setFile(new ImageFile("coffee.png", "PNG", "******", Long.valueOf(1024))).createImageLog());
+
+			mockLog(logBuilder.setUUID().setShortCode().setName("third log")
+					.setDescription("Few minutes later, I am going for a ride")
+					.setFile(new VideoFile("biking1.mp4", "MP4", "******", Long.valueOf(1024))).createVideoLog());
+
+			mockLog(logBuilder.setUUID().setShortCode().setName("fourth log")
+					.setDescription("And even later, I need to have lunch")
+					.setFile(new TextFile("recipie.txt", "TXT", "******", Long.valueOf(1024))).createTextLog());
 		} catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage() + "\n\n");
 
@@ -39,10 +49,8 @@ public class Main {
 
 	}
 
-	private static void mockLog(Log log, File file) throws Exception {
+	private static void mockLog(Log log) throws Exception {
 		System.out.println(">>> New log (" + log.toString() + ")");
-		log.attachFile(file);
-		log.create();
 		System.out.println("\n");
 	}
 }
