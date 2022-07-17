@@ -1,15 +1,8 @@
-/**
- * 
- */
 package com.algonquin.loggy;
 
 import com.aws.api.AWSTranscribeAPI;
 import com.google.api.GoogleSpeech2TextAPI;
 
-/**
- * @author jesus
- *
- */
 public class CCWorker implements Runnable {
 	private final Recording recording;
 
@@ -19,9 +12,6 @@ public class CCWorker implements Runnable {
 	}
 
 	@Override
-	/**
-	 *
-	 */
 	public void run() {
 		System.out.println(
 				Thread.currentThread().getName() + " (Start closed captioning) recording = " + recording.getFileName());
@@ -58,7 +48,7 @@ public class CCWorker implements Runnable {
 		recording.setCcFileMock(ccFile);
 		System.out.println(ccFile + " processed using GoogleSpeech2TextAPI");
 	}
-	
+
 	private void triggerAWSClosedCaptioning() {
 		String rawFile = recording.getMediaFileMock();
 		Long fileSize = recording.getFileSize();

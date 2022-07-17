@@ -1,15 +1,8 @@
-/**
- * 
- */
 package com.algonquin.loggy;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/**
- * @author jesus
- *
- */
 public class CCSpooler {
 	private final ExecutorService executor;
 

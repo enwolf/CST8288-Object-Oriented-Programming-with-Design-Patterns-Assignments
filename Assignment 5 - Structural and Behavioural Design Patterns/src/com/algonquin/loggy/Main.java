@@ -1,21 +1,11 @@
-/**
- * 
- */
 package com.algonquin.loggy;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * @author jesus
- *
- */
 public class Main {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		int maxmockups = 1; // The number of mock-ups to be generated.
 
@@ -32,6 +22,7 @@ public class Main {
 		recordings.forEach((recording) -> {
 			spooler.enqueue(recording);
 		});
+
 		spooler.shutdown();
 	}
 
