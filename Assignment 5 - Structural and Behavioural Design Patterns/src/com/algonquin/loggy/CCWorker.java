@@ -1,8 +1,5 @@
 package com.algonquin.loggy;
 
-import com.aws.api.AWSTranscribeAPI;
-import com.google.api.GoogleSpeech2TextAPI;
-
 public class CCWorker implements Runnable {
 	private final Recording recording;
 
@@ -28,19 +25,19 @@ public class CCWorker implements Runnable {
 	private void triggerGoogleClosedCaptioning() {
 		String rawFile = recording.getMediaFileMock();
 		Long fileSize = recording.getFileSize();
-		GoogleSpeech2TextAPI api = new GoogleSpeech2TextAPI();
+		GoogleSpeech2TextProxy googleProxyAPI = new GoogleSpeech2TextProxy();
 		String ccFile = "";
 		System.out.println("Closed captioning " + rawFile + " will take " + fileSize + " milliseconds...");
 		try {
 			// Simulate the delay.
 			Thread.sleep(fileSize);
 			// MockUp transcript process.
-			String speechClient = api.instantiateClient();
-			String audioBytes = api.fileToMemory(rawFile);
-			String config = api.buildSyncRecognizeRequestConfig();
-			String audio = api.buildSyncRecognizeRequestAudio();
-			api.performSpeechRecognition(config, audio);
-			String transcript = api.getFirstTranscriptAlternative();
+			String speechClient = googleProxyAPI.instantiateClient();
+			String audioBytes = googleProxyAPI.fileToMemory(rawFile);
+			String config = googleProxyAPI.buildSyncRecognizeRequestConfig();
+			String audio = googleProxyAPI.buildSyncRecognizeRequestAudio();
+			googleProxyAPI.performSpeechRecognition(config, audio);
+			String transcript = googleProxyAPI.getFirstTranscriptAlternative();
 			ccFile = transcript;
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -52,18 +49,18 @@ public class CCWorker implements Runnable {
 	private void triggerAWSClosedCaptioning() {
 		String rawFile = recording.getMediaFileMock();
 		Long fileSize = recording.getFileSize();
-		AWSTranscribeAPI api = new AWSTranscribeAPI();
+		AWSTranscribeProxy AWSProxyApi = new AWSTranscribeProxy();
 		String ccFile = "";
 		System.out.println("Closed captioning " + rawFile + " will take " + fileSize + " milliseconds...");
 		try {
 			// Simulate the delay.
 			Thread.sleep(fileSize);
 			// MockUp transcript process.
-			String client = api.clientCreate();
-			String stream = api.getStreamFromFile(rawFile);
-			api.startStreamTranscription(client, stream);
-			String transcript = api.getResult();
-			api.clientClose(client);
+			String client = AWSProxyApi.clientCreate();
+			String stream = AWSProxyApi.getStreamFromFile(rawFile);
+			AWSProxyApi.startStreamTranscription(client, stream);
+			String transcript = AWSProxyApi.getResult();
+			AWSProxyApi.clientClose(client);
 			ccFile = transcript;
 		} catch (InterruptedException e) {
 			e.printStackTrace();
