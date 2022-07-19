@@ -2,6 +2,10 @@ package com.algonquin.loggy;
 
 public class CCAWSAdapter implements ICCAdapter {
 
+	public CCAWSAdapter() {
+
+	}
+
 	@Override
 	public void triggerClosedCaptioning(Recording recording) {
 
