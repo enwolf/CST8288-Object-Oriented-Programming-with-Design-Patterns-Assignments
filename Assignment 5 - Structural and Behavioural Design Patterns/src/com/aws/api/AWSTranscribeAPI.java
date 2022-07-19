@@ -3,6 +3,8 @@ package com.aws.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.algonquin.loggy.IAWSTranscribeAPI;
+
 /* This is a very rough and ugly AWS Transcribe API pretender
  * for academic purposes non related to API programming nor Speech2Text
  * recognition or whatsoever.
@@ -11,7 +13,7 @@ import java.util.List;
  * AWS API you can find real examples at:
  * https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javav2/example_code/transcribe 
  */
-public class AWSTranscribeAPI {
+public class AWSTranscribeAPI implements IAWSTranscribeAPI {
 
 	List<String> transcript;
 	String fileName;
@@ -20,11 +22,13 @@ public class AWSTranscribeAPI {
 		transcript = new ArrayList<String>();
 	}
 
+	@Override
 	public String getStreamFromFile(String audioFileName) {
 		this.fileName = audioFileName;
 		return "streamFromFile";
 	}
 
+	@Override
 	public void startStreamTranscription(String client, String stream) {
 		System.out.println(client + " is starting streaming " + stream);
 		transcript.add("<transcript> for " + this.fileName);
@@ -33,6 +37,7 @@ public class AWSTranscribeAPI {
 		}
 	}
 
+	@Override
 	public String getResult() {
 		String transcriptString = "";
 
@@ -42,10 +47,12 @@ public class AWSTranscribeAPI {
 		return transcriptString;
 	}
 
+	@Override
 	public String clientCreate() {
 		return "client";
 	}
 
+	@Override
 	public void clientClose(String client) {
 		System.out.println("Closing " + client);
 	}
