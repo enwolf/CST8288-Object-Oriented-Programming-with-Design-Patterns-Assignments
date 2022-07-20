@@ -2,6 +2,8 @@ package com.algonquin.loggy;
 
 public class CCWorker implements Runnable {
 	private final Recording recording;
+	private CCGoogleAdapter googleAdapter = new CCGoogleAdapter();
+	private CCAWSAdapter AWSAdapter = new CCAWSAdapter();
 
 	// Constructor to assign a message when creating a new thread
 	public CCWorker(Recording recording) {
@@ -17,7 +19,8 @@ public class CCWorker implements Runnable {
 		triggerAWSClosedCaptioning();
 
 		// Trigger CC using the adapter methods.
-		// TODO
+		googleAdapter.triggerClosedCaptioning(recording);
+		AWSAdapter.triggerClosedCaptioning(recording);
 
 		System.out.println(Thread.currentThread().getName() + " (End closed captioning)");
 	}
