@@ -1,13 +1,17 @@
 package com.algonquin.loggy;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class Recording implements Subject {
+
 	private UUID uuid;
-	private String fileName;
 	private Long fileSize;
-	private String mediaFileMock;
+	private String fileName;
 	private String ccFileMock;
+	private String mediaFileMock;
+	// reocrding.java is the subject of observer
+	private ArrayList<Observer> observers;
 
 	public Recording(UUID uuid, String fileName, Long fileSize) {
 		super();
@@ -15,24 +19,27 @@ public class Recording implements Subject {
 		this.fileName = fileName;
 		this.fileSize = fileSize;
 		this.mediaFileMock = fileName;
+		this.observers = new ArrayList<Observer>();
 	}
 
 	@Override
 	public void registerObserver(Observer o) {
-		// TODO Auto-generated method stub
-
+		observers.add(o);
 	}
 
 	@Override
 	public void removeObserver(Observer o) {
-		// TODO Auto-generated method stub
-
+		int i = observers.indexOf(o);
+		if (i >= 0) {
+			observers.remove(i);
+		}
 	}
 
 	@Override
 	public void notifyObservers() {
-		// TODO Auto-generated method stub
-
+		for (Observer observer : observers) {
+			observer.update(ccFileMock, fileName);
+		}
 	}
 
 	public String getFileName() {
@@ -41,6 +48,7 @@ public class Recording implements Subject {
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+		notifyObservers();
 	}
 
 	public Long getFileSize() {
@@ -65,6 +73,7 @@ public class Recording implements Subject {
 
 	public void setCcFileMock(String ccFileMock) {
 		this.ccFileMock = ccFileMock;
+		notifyObservers();
 	}
 
 }
