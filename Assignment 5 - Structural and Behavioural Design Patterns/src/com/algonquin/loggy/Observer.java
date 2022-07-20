@@ -2,6 +2,6 @@ package com.algonquin.loggy;
 
 public interface Observer {
 
-	public void update(int value);
+	public void update(String ccFile, String fileName);
 
 }
