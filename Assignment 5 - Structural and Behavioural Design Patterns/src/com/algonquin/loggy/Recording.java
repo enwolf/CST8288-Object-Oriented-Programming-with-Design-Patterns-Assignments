@@ -2,7 +2,7 @@ package com.algonquin.loggy;
 
 import java.util.UUID;
 
-public class Recording {
+public class Recording implements Subject {
 	private UUID uuid;
 	private String fileName;
 	private Long fileSize;
@@ -15,6 +15,24 @@ public class Recording {
 		this.fileName = fileName;
 		this.fileSize = fileSize;
 		this.mediaFileMock = fileName;
+	}
+
+	@Override
+	public void registerObserver(Observer o) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void removeObserver(Observer o) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void notifyObservers() {
+		// TODO Auto-generated method stub
+
 	}
 
 	public String getFileName() {
