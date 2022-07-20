@@ -38,7 +38,7 @@ public class Recording implements Subject {
 	@Override
 	public void notifyObservers() {
 		for (Observer observer : observers) {
-			observer.update(ccFileMock, fileName);
+			observer.update(ccFileMock, fileName, fileSize);
 		}
 	}
 
@@ -57,6 +57,7 @@ public class Recording implements Subject {
 
 	public void setFileSize(Long fileSize) {
 		this.fileSize = fileSize;
+		notifyObservers();
 	}
 
 	public String getMediaFileMock() {
