@@ -21,7 +21,7 @@ public class RecordingObserver implements Observer {
 	public void display() {
 
 		System.out.println(
-				"RecordingObserver Reproting - RecordingName: " + fileName + " has attched ccFile: " + ccFile + "\n");
+				"RecordingObserver Reporting - RecordingName: " + fileName + " has attched ccFile: " + ccFile + "\n");
 
 	}
 
